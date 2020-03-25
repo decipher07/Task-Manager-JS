@@ -16,7 +16,17 @@ const taskSchema = new mongoose.Schema({
         required: true,
         ref: 'User' 
     }
+},{
+    timestamps: true
 })
+
+
+taskSchema.virtual('tasks', {
+    ref: 'user',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 
 
 const Task = mongoose.model('Tasks', taskSchema )
